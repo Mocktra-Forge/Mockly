@@ -34,6 +34,8 @@ Mockly empowers students (especially those preparing for placement rounds) to im
   - **LLM Assessment (40% weight)**: Grades communication clarity, technical accuracy, and completeness using Google Gemini.
 - **Structured Feedback**: Real-time analysis detailing strengths, weaknesses, missing key points, and suggestions.
 
+![AI Answer Evaluation UI](assets/mockly_evaluation_mockup.png)
+
 ### 3. Timed Mock Interviews
 - Timed 10-question mock sessions (45-minute timer) simulating real-world pressure.
 - Real-time countdown timer that auto-submits answers on timeout.
@@ -45,11 +47,15 @@ Mockly empowers students (especially those preparing for placement rounds) to im
 - **HR Round**: Gated access requiring a passed Technical round. Evaluates communication, behavior, and situational judgment using LLM-heavy grading.
 - **Attempt Tracking**: Enforces a strict 3-retry attempt limit per round before locking access.
 
+![Gated Placement Flow UI](assets/mockly_gated_flow_mockup.png)
+
 ### 5. Performance Dashboard
 - **Topic Radar Chart**: Displays strengths and weaknesses across different modules.
 - **Score Line Chart**: Visualizes score trends and progress over time.
 - **Stats Cards**: Displays total questions answered, average score, and active mock sessions.
 - **Smart Recommendations**: Suggests questions based on the student's weakest topics.
+
+![Performance Dashboard UI](assets/mockly_dashboard_mockup.png)
 
 ### 6. Admin Panel
 - **Protected Access**: REST endpoints and React UI screens restricted to users with the admin role.
