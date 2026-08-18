@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Questions from './pages/Questions';
 import Practice from './pages/Practice';
+import QuestionAttempts from './pages/QuestionAttempts';
 import Dashboard from './pages/Dashboard';
 import MockInterview from './pages/MockInterview';
 import MockScorecard from './pages/MockScorecard';
@@ -114,6 +115,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Practice />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/practice/:id/attempts"
+            element={
+              <ProtectedRoute>
+                <QuestionAttempts />
               </ProtectedRoute>
             }
           />

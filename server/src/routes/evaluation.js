@@ -2,6 +2,7 @@ import { Router } from 'express';
 import protect from '../middleware/auth.js';
 import { evaluateAttempt } from '../services/evaluationCoordinator.js';
 import PracticeAttempt from '../models/PracticeAttempt.js';
+import Question from '../models/Question.js';
 
 const router = Router();
 
@@ -56,4 +57,50 @@ router.post('/submit', protect, async (req, res) => {
   }
 });
 
+/**
+ * GET /api/evaluation/attempts/:questionId
+ * Fetch all previous attempts for a specific question by the current logged-in user.
+ */
+router.get('/attempts/:questionId', protect, async (req, res) => {
+  try {
+    const { questionId } = req.params;
+    const userId = req.user._id;
+
+    const question = await Question.findById(questionId).select('-isActive -__v');
+    if (!question) {
+      return res.status(404).json({ message: 'Question not found' });
+    }
+
+    const attempts = await PracticeAttempt.find({
+      user: userId,
+      question: questionId,
+    }).sort({ createdAt: -1 });
+
+    const totalAttempts = attempts.length;
+    let highestScore = 0;
+    let averageScore = 0;
+
+    if (totalAttempts > 0) {
+      highestScore = Math.max(...attempts.map((a) => a.overallScore || 0));
+      const sum = attempts.reduce((acc, a) => acc + (a.overallScore || 0), 0);
+      averageScore = Math.round(sum / totalAttempts);
+    }
+
+    res.status(200).json({
+      question,
+      attempts,
+      stats: {
+        totalAttempts,
+        highestScore,
+        averageScore,
+        latestAttemptDate: attempts[0] ? attempts[0].createdAt : null,
+      },
+    });
+  } catch (err) {
+    console.error('Error fetching question attempts history:', err);
+    res.status(500).json({ message: 'Server error fetching question attempts' });
+  }
+});
+
 export default router;
+
