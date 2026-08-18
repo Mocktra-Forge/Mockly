@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ScoreRing from './ScoreRing';
 import MetricBar from './MetricBar';
 import FeedbackCard from './FeedbackCard';
@@ -8,6 +9,7 @@ import FeedbackCard from './FeedbackCard';
  * Renders completed evaluation scorecard (both MCQ instant results and descriptive AI feedback).
  */
 export default function EvaluationResultScorecard({ result, question, onReset, onNavigateBack }) {
+  const navigate = useNavigate();
   const isMcqResult = result.isMcq || (question?.options && question.options.length > 0);
 
   if (isMcqResult) {
@@ -55,13 +57,21 @@ export default function EvaluationResultScorecard({ result, question, onReset, o
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button onClick={onReset} className="btn-primary flex-1">
             🔄 Try Again
           </button>
+          {question?._id && (
+            <button
+              onClick={() => navigate(`/practice/${question._id}/attempts`)}
+              className="flex-1 px-4 py-3 rounded-xl border border-amber-900/30 text-amber-950 font-semibold bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-900/50 transition-all text-sm flex items-center justify-center gap-2"
+            >
+              📜 View Previous Attempts
+            </button>
+          )}
           <button
             onClick={onNavigateBack}
-            className="flex-1 px-4 py-3 rounded-xl bg-stone-100 border border-stone-200 text-stone-700 hover:bg-stone-200 transition-all font-medium"
+            className="flex-1 px-4 py-3 rounded-xl bg-stone-100 border border-stone-200 text-stone-700 hover:bg-stone-200 transition-all font-medium text-sm"
           >
             ← Back to Questions
           </button>
@@ -132,13 +142,21 @@ export default function EvaluationResultScorecard({ result, question, onReset, o
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         <button onClick={onReset} className="btn-primary flex-1">
           🔄 Try Again
         </button>
+        {question?._id && (
+          <button
+            onClick={() => navigate(`/practice/${question._id}/attempts`)}
+            className="flex-1 px-4 py-3 rounded-xl border border-amber-900/30 text-amber-950 font-semibold bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-900/50 transition-all text-sm flex items-center justify-center gap-2"
+          >
+            📜 View Previous Attempts
+          </button>
+        )}
         <button
           onClick={onNavigateBack}
-          className="flex-1 px-4 py-3 rounded-xl bg-stone-100 border border-stone-200 text-stone-700 hover:bg-stone-200 transition-all font-medium"
+          className="flex-1 px-4 py-3 rounded-xl bg-stone-100 border border-stone-200 text-stone-700 hover:bg-stone-200 transition-all font-medium text-sm"
         >
           ← Back to Questions
         </button>
@@ -146,3 +164,4 @@ export default function EvaluationResultScorecard({ result, question, onReset, o
     </div>
   );
 }
+

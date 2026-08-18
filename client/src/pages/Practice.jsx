@@ -140,16 +140,28 @@ export default function Practice() {
     <div className="min-h-screen">
       <Navbar />
       <div className="max-w-4xl mx-auto px-4 pt-10 pb-16 page-enter">
-        {/* Back Navigation Link */}
-        <button
-          onClick={() => navigate('/questions')}
-          className="flex items-center gap-2 text-stone-500 hover:text-stone-800 transition-colors mb-6 text-sm"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back to Questions
-        </button>
+        {/* Navigation Link Bar */}
+        <div className="flex items-center justify-between mb-6">
+          <button
+            onClick={() => navigate('/questions')}
+            className="flex items-center gap-2 text-stone-500 hover:text-stone-800 transition-colors text-sm"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Questions
+          </button>
+
+          <button
+            onClick={() => navigate(`/practice/${id}/attempts`)}
+            className="px-3.5 py-1.5 rounded-xl border border-amber-900/30 text-amber-950 font-semibold bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-900/50 transition-all flex items-center gap-1.5 text-xs"
+          >
+            <svg className="w-3.5 h-3.5 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            View Previous Attempts
+          </button>
+        </div>
 
         {/* Question Details Header Card */}
         <div className="glass-card p-6 md:p-8 mb-6">

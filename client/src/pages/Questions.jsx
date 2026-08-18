@@ -113,17 +113,29 @@ function QuestionModal({ question, onClose }) {
           </div>
         )}
 
-        {/* Practice button */}
-        <button
-          onClick={() => navigate(`/practice/${question._id}`)}
-          className="btn-primary w-full flex items-center justify-center gap-2"
-        >
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Practice this Question
-        </button>
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={() => navigate(`/practice/${question._id}`)}
+            className="btn-primary flex-1 flex items-center justify-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Practice this Question
+          </button>
+
+          <button
+            onClick={() => navigate(`/practice/${question._id}/attempts`)}
+            className="flex-1 px-4 py-3 rounded-xl border border-amber-900/30 text-amber-950 font-semibold bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-900/50 transition-all flex items-center justify-center gap-2 text-sm"
+          >
+            <svg className="w-4 h-4 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            View Previous Attempts
+          </button>
+        </div>
       </div>
     </div>
   );
